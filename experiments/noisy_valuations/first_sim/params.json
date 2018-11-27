@@ -1,0 +1,10 @@
+{
+    "methods": ["UtilityFairnessMethod", "PriceFairnessMethod"],
+    "n": 2,
+    "num_samples": 100,
+    "scale_range": [1, 9],
+    "scale_samples": 50,
+
+    "mean_scale": 20,
+    "initial_scale": 15
+}

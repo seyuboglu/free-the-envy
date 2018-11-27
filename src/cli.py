@@ -5,25 +5,36 @@ import os
 
 import click
 
-from split import Split
-from methods.fairness import FairnessMethod
+from split import Split, MultiSplit
+from noisy import NoisySimulation
+
+
+def get_process(process_name):
+    """
+    """
+    process_name = ''.join(x.capitalize() or '_' for x in process_name.split('_'))
+    assert(process_name in globals())
+    return globals()[process_name]
+    
+
 
 @click.command()
 @click.option(
+    "--process",
+    type=str,
+    default="Split"
+)
+@click.option(
     "--dir",
     type=str,
-    default="experiments/first_experiment"
+    default="experiments/split/first_split"
 )
-def main(dir):
+def main(process, dir):
     print("Spliddit Analysis")
     print("-----------------")
 
-    with open(os.path.join(dir, "params.json")) as f:
-        params = json.load(f)
-    split = Split(params)
-    split.solve(method_class=FairnessMethod)
-    split.output_results()
-
+    split = get_process(process)(dir)
+    split.run()
 
 if __name__ == "__main__":
     main()

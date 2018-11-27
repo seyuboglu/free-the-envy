@@ -1,0 +1,12 @@
+{
+    "n": 2,
+    "total_rent": 1000,
+
+    "method": "FairnessMethod",
+
+    "agent_to_valuations": {
+        "Sabri": [400, 600],
+        "Kye": [300, 700]
+    }
+
+}
