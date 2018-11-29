@@ -1,14 +1,13 @@
 {
-    "n": 4,
-    "total_rent": 1000,
+    "n": 3,
+    "total_rent": 750,
 
     "methods": ["PriceFairnessMethod", 
                 "UtilityFairnessMethod"],
 
     "agent_to_valuations": {
-        "Sabri": [200, 250, 250, 300],
-        "Kye":   [250, 250, 250, 250],
-        "Bob":   [250, 250, 250, 250], 
-        "KiJung":[100, 250, 250, 400]
+        "Sabri": [250, 250, 250],
+        "Kye":   [150, 250, 350],
+        "KiJung":[100, 250, 400]
     }
 }

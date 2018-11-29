@@ -1,11 +1,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
 // setup some JSON to use
-var cars = [
-	{ "make":"Porsche", "model":"911S" },
-	{ "make":"Mercedes-Benz", "model":"220SE" },
-	{ "make":"Jaguar","model": "Mark VII" }
-];
+var cars = {
+    "n": 3,
+    "total_rent": 750,
+
+    "method": "PriceFairnessMethod",
+
+    "agent_to_valuations": {
+        "Sabri": [250, 250, 250],
+        "Kye":   [250, 250, 250],
+        "KiJung":[100, 250, 400]
+    }
+};
 
 window.onload = function() {
 	// setup the button click
@@ -16,7 +23,7 @@ window.onload = function() {
 
 function doWork() {
 	// ajax the JSON to the server
-	$.post("receiver", cars, function(){
+	$.post("receiver", JSON.stringify(cars), function() {
 
 	});
 	// stop link reloading the page

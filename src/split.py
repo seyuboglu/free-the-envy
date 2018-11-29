@@ -11,7 +11,7 @@ import pandas as pd
 from methods.fairness import PriceFairnessMethod, UtilityFairnessMethod
 from utils import Process
 
-class MultiSplit(Process):
+class SplitCli(Process):
     """
     Holds one instance of a rent splitting problem parameterized
     by a dict describing the problem. 
@@ -112,7 +112,7 @@ class MultiSplit(Process):
         self.solved[method_name] = True     
 
 
-class Split(Process):
+class Split():
     """
     Holds one instance of a rent splitting problem parameterized
     by a dict describing the problem. 
@@ -130,15 +130,29 @@ class Split(Process):
     }
     """
 
-    def __init__(self, dir):
+    def __init__(self, params):
         """
         Initializes splitting instance. 
         args:
         params  (dict)  of form described above. 
         """
-        super().__init__(dir)
+        self.__dict__.update(params)
         self.solved = False
         self.preprocess_valuations()
+    
+    def get_results(self):
+        """
+        """
+        assert(self.solved)
+        data = {agent:
+                {"room": int(self.assignments[i]),
+                 "price": self.prices[self.assignments[i]] * self.total_rent,
+                 "valuation": self.valuations[i, self.assignments[i]] * self.total_rent,
+                 "utility": ((self.valuations[i, self.assignments[i]] - 
+                              self.prices[self.assignments[i]]) * 
+                              self.total_rent)} 
+                for i, agent in enumerate(self.agents)}
+        return data
 
     def output_results(self):
         """
@@ -146,7 +160,6 @@ class Split(Process):
         TODO: work for any number of solution calls.
         """
         assert(self.solved)
-        data = []
         data = [{"agent": agent,
                  "room": self.assignments[i],
                  "price": self.prices[self.assignments[i]] * self.total_rent,

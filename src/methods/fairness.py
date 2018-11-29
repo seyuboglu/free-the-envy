@@ -133,7 +133,7 @@ class PriceFairnessMethod():
 
             g = np.zeros(self.n + 1)
             g[-1] = 1
-            g[assigned_room] = 1 
+            g[assigned_room] = -1 
             h = 0 #self.valuations[agent_id, assigned_room] 
 
             all_G.append(g)

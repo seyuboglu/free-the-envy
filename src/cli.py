@@ -5,7 +5,7 @@ import os
 
 import click
 
-from split import Split, MultiSplit
+from split import SplitCli
 from noisy import NoisySimulation
 
 

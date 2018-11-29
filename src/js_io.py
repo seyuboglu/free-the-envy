@@ -5,24 +5,25 @@ from flask import Flask, render_template, request, redirect, Response
 import random
 import json
 
+from split import Split
+
 app = Flask(__name__)
 
 
-@app.route("/output")
+@app.route("/")
 def output():
-    return render_template('index.html', name='Joe')
+    return render_template('index.html', name='Chris')
 
 
 @app.route('/receiver', methods=['POST'])
 def worker():
     # read json + reply
     data = request.get_json(force=True)
-    result = ''
-    for item in data:
-        # loop over every row
-        result += str(item['make']) + '\n'
-    print("AHDLJNFKJNDFKJN")
-    return result
+    split = Split(data)
+    split.solve()
+    results = split.get_results()
+    split.output_results()
+    return json.dumps(results)
 
 if __name__ == "__main__":
     app.run()
