@@ -28,6 +28,7 @@
                     <th>Room1</th>
                     <th>Room2</th>
                     <th>Room3</th>
+                    <th>Room4</th>
                   </tr>
               </thead>
               <tbody>
@@ -44,6 +45,9 @@
                     <td class=" col-md-2 mb-3">
                       <input type="text" class="form-control" id="p1room3" placeholder="" value="" required>
                     </td>
+                    <td class=" col-md-2 mb-3">
+                        <input type="text" class="form-control" id="p1room4" placeholder="" value="" required>
+                    </td>
                   </tr>
                   <tr>
                     <td class=" col-md-2 mb-3">
@@ -58,6 +62,9 @@
                     <td class=" col-md-2 mb-3">
                       <input type="text" class="form-control" id="p2room3" placeholder="" value="" required>
                     </td>
+                    <td class=" col-md-2 mb-3">
+                        <input type="text" class="form-control" id="p2room4" placeholder="" value="" required>
+                    </td>
                   </tr>
                   <tr>
                     <td class=" col-md-2 mb-3">
@@ -71,6 +78,26 @@
                     </td>
                     <td class=" col-md-2 mb-3">
                       <input type="text" class="form-control" id="p3room3" placeholder="" value="" required>
+                    </td>
+                    <td class=" col-md-2 mb-3">
+                        <input type="text" class="form-control" id="p3room4" placeholder="" value="" required>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class=" col-md-2 mb-3">
+                      <input type="text" class="form-control" id="p4name" placeholder="" value="" required>
+                    </td>
+                    <td class=" col-md-2 mb-3">
+                      <input type="text" class="form-control" id="p4room1" placeholder="" value="" required>
+                    </td>
+                    <td class=" col-md-2 mb-3">
+                      <input type="text" class="form-control" id="p4room2" placeholder="" value="" required>
+                    </td>
+                    <td class=" col-md-2 mb-3">
+                      <input type="text" class="form-control" id="p4room3" placeholder="" value="" required>
+                    </td>
+                    <td class=" col-md-2 mb-3">
+                        <input type="text" class="form-control" id="p4room4" placeholder="" value="" required>
                     </td>
                   </tr>
               </tbody>
@@ -107,6 +134,8 @@ function clicked() {
     p1vals.push(p1room2);
     var p1room3 = parseFloat(document.getElementById('p1room3').value);
     p1vals.push(p1room3);
+    var p1room4 = parseFloat(document.getElementById('p1room4').value);
+    p1vals.push(p1room4);
     agent_to_valuations[p1name] = p1vals
 
     var p2name = document.getElementById('p2name').value;
@@ -117,6 +146,8 @@ function clicked() {
     p2vals.push(p2room2);
     var p2room3 = parseFloat(document.getElementById('p2room3').value);
     p2vals.push(p2room3);
+    var p2room4 = parseFloat(document.getElementById('p2room4').value);
+    p2vals.push(p2room4);
     agent_to_valuations[p2name] = p2vals
 
     var p3name = document.getElementById('p3name').value;
@@ -127,9 +158,23 @@ function clicked() {
     p3vals.push(p3room2);
     var p3room3 = parseFloat(document.getElementById('p3room3').value);
     p3vals.push(p3room3);
+    var p3room4 = parseFloat(document.getElementById('p3room4').value);
+    p3vals.push(p3room4);
     agent_to_valuations[p3name] = p3vals
 
-    var response =  { "n": 3, "total_rent": 1000, "method": "PriceFairnessMethod", "agent_to_valuations" : agent_to_valuations}
+    var p4name = document.getElementById('p4name').value;
+    var p4vals = [];
+    var p4room1 = parseFloat(document.getElementById('p4room1').value);
+    p4vals.push(p4room1);
+    var p4room2 = parseFloat(document.getElementById('p4room2').value);
+    p4vals.push(p4room2);
+    var p4room3 = parseFloat(document.getElementById('p4room3').value);
+    p4vals.push(p4room3);
+    var p4room4 = parseFloat(document.getElementById('p4room4').value);
+    p4vals.push(p4room4);
+    agent_to_valuations[p4name] = p4vals
+
+    var response =  { "n": 4, "total_rent": 5700, "method": "PriceFairnessMethod", "agent_to_valuations" : agent_to_valuations}
 
     // let form = document.createElement('form');
     // form.action = 'https://google.com/search';
