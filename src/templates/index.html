@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title></title>
     <!-- <link rel="shortcut icon" href=""> -->
-    <link rel="stylesheet" href="css/slides.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   </head>
@@ -94,8 +93,68 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-    <script src="slideshow.js"></script>
-    <script src="form.js"></script>
+    <!-- <script src="slideshow.js"></script> -->
+    <script>
+
+
+function clicked() {
+    var agent_to_valuations = {};
+    var p1name = document.getElementById('p1name').value;
+    var p1vals = [];
+    var p1room1 = parseFloat(document.getElementById('p1room1').value);
+    p1vals.push(p1room1);
+    var p1room2 = parseFloat(document.getElementById('p1room2').value);
+    p1vals.push(p1room2);
+    var p1room3 = parseFloat(document.getElementById('p1room3').value);
+    p1vals.push(p1room3);
+    agent_to_valuations[p1name] = p1vals
+
+    var p2name = document.getElementById('p2name').value;
+    var p2vals = [];
+    var p2room1 = parseFloat(document.getElementById('p2room1').value);
+    p2vals.push(p2room1);
+    var p2room2 = parseFloat(document.getElementById('p2room2').value);
+    p2vals.push(p2room2);
+    var p2room3 = parseFloat(document.getElementById('p2room3').value);
+    p2vals.push(p2room3);
+    agent_to_valuations[p2name] = p2vals
+
+    var p3name = document.getElementById('p3name').value;
+    var p3vals = [];
+    var p3room1 = parseFloat(document.getElementById('p3room1').value);
+    p3vals.push(p3room1);
+    var p3room2 = parseFloat(document.getElementById('p3room2').value);
+    p3vals.push(p3room2);
+    var p3room3 = parseFloat(document.getElementById('p3room3').value);
+    p3vals.push(p3room3);
+    agent_to_valuations[p3name] = p3vals
+
+    var response =  { "n": 3, "total_rent": 1000, "method": "PriceFairnessMethod", "agent_to_valuations" : agent_to_valuations}
+
+    // let form = document.createElement('form');
+    // form.action = 'https://google.com/search';
+    // form.method = 'GET';
+    //
+    // form.innerHTML = '<input name="q" value="test">';
+
+    // the form must be in the document to submit it
+
+
+    doWork(response)
+}
+
+function doWork(response) {
+  // ajax the JSON to the server
+  $.post("receiver", JSON.stringify(response), function(){
+     
+  });
+  // stop link reloading the page
+ event.preventDefault();
+}
+
+document.getElementById('btn').addEventListener('click', clicked);
+
+    </script>
 
   </body>
 </html>
