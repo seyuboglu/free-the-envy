@@ -5,115 +5,98 @@
     <title></title>
     <!-- <link rel="shortcut icon" href=""> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <script src="jquery-3.3.1.min.js"></script> -->
 
   </head>
   <!-- <script src="pixi.js"></script> -->
 
   <body class="bg-light">
-    <div class="container">
-      <div class="py-5 text-center">
-        <h2>How much do you value?</h2>
-        <p class="lead">Indicate your valuation for each room in the apartment</p>
+    <div class="container" id="setup">
+      <form class="needs-validation" novalidate>
+
+        <div class="py-5 text-center">
+          <h2>What is the house's total rent?</h2>
+          <p class="lead">We will help you split this $ well!</p>
+          <div class="col-xs-4" >
+                  <input type="text" class="form-control" id="totalRent" placeholder="ex) 1000" />
+                  <div class="invalid-feedback" style="width: 100%;">
+                      Please specify the total rent $
+                  </div>
+          </div>
+        </div>
+
+        <div class="py-5 text-center">
+          <h2>Please list all the rooms you have</h2>
+          <p class="lead">Give each room a name</p>
+        <div class="col-xs-4" id="roomnames">
+            <div class="mb-3">
+              <input type="text" class="form-control" id="roomname1" placeholder="ex) master bedroom" required>
+              <div class="invalid-feedback">
+                  Please list all room
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="roomname2" placeholder="ex) Cupboard Under the Stairs" required>
+              <div class="invalid-feedback">
+                  Please enter room name
+              </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-lg" id="roomnameBtn" onclick="addRow()" >+</button>
       </div>
-      <div class="row">
-        <div class="col-md-5 order-md-2 mb-4">
-          <form class="needs-validation" novalidate>
-            <div class="input-group">
+      <button type="button" class="btn btn-primary btn-lg btn-block mb-3" id="setupBtn" onclick="setup()" >Submit</button>
+    </div>
+      <div class="container hidden" id="valuation">
+        <div class="py-5 text-center">
+          <h2>How much do you value?</h2>
+          <p class="lead">Indicate your valuation for each room in the apartment</p>
+        </div>
+        <div class="row">
+          <!-- <div class="col-md-5 order-md-2 mb-4"> -->
+            <form class="needs-validation" novalidate>
+              <div class="input-group">
 
-            <div class="table-responsive">
-            <table class="table table-striped table-md">
-              <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Room1</th>
-                    <th>Room2</th>
-                    <th>Room3</th>
-                    <th>Room4</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td class="col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p1name" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p1room1" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p1room2" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p1room3" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                        <input type="text" class="form-control" id="p1room4" placeholder="" value="" required>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p2name" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p2room1" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p2room2" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p2room3" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                        <input type="text" class="form-control" id="p2room4" placeholder="" value="" required>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p3name" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p3room1" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p3room2" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p3room3" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                        <input type="text" class="form-control" id="p3room4" placeholder="" value="" required>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p4name" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p4room1" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p4room2" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                      <input type="text" class="form-control" id="p4room3" placeholder="" value="" required>
-                    </td>
-                    <td class=" col-md-2 mb-3">
-                        <input type="text" class="form-control" id="p4room4" placeholder="" value="" required>
-                    </td>
-                  </tr>
-              </tbody>
-            </table>
+              <div class="table-responsive">
+              <table class="table table-striped table-md" id="valueTable">
+                <thead>
+                    <tr id="valueHeadRow">
+                      <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody id="valueTableBody">
 
-            <button class="btn btn-primary btn-lg btn-block" id="btn">Submit</button>
+                </tbody>
+              </table>
+              <h4 class="mb-3">Method</h4>
+              <div class="d-block my-3">
+                <select class="form-control form-control-md" id="method">
+                  <option>Price Fairness</option>
+                  <option>Utility Fairness</option>
+                </select>
+              </div>
+              <br>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="submitBtn" onclick="sendResult()">Submit</button>
+              </div>
+              </form>
+            <!-- </div> -->
+
             </div>
 
-          </div>
+            </form>
 
-          </form>
-
+            </div>
           </div>
-           </div>
+          <div class="container hidden" id="result">
+            <div class="py-5 text-center">
+              <h2>Result</h2>
+              <p class="lead">Here we go!</p>
+            </div>
+            <div class="card-deck mb-3 text-center" id="resultCard">
+
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     <div id="display"></div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -123,90 +106,221 @@
     <!-- <script src="slideshow.js"></script> -->
     <script>
 
+var roomnames = ['roomname1', 'roomname2']
+var names = []
+var totalRent = 0
+function addRow() {
+  // if(ID == 'roomnames'){
+    var parent = document.getElementById('roomnames');
+    var child = document.createElement("div");
+    child.class = "mb-3"
+    var newnum = roomnames.length + 1
+    var id = 'roomname' + newnum
+    child.innerHTML =  '<input type="text" class="form-control" id="' + id +'" required> <div class="invalid-feedback"> Please enter room name </div> <br>'
+    console.log(child.innerHTML)
+    // var input = document.createElement("input");
+    // input.type = "text";
+    // input.class= "form-control";
+    // input.id = id
+    roomnames.push(id)
+    // child.appendChild(input);
+    parent.appendChild(child);
+  // }
+}
 
-function clicked() {
+function setup() {
+  var valuation = document.getElementById('valuation');
+  valuation.classList.remove("hidden");
+  var setup = document.getElementById('setup');
+  setup.classList.add("hidden");
+  totalRent = document.getElementById('totalRent').value;
+  createValuationRows();
+}
+
+function createValuationRows() {
+  var roomCount = roomnames.length;
+  var headRow = document.getElementById('valueHeadRow');
+  var bodyTable = document.getElementById('valueTableBody');
+
+  for(var i=0; i<roomCount; i++) {
+    var head = document.createElement("th");
+    console.log(roomnames)
+    head.innerHTML = document.getElementById(roomnames[i]).value
+    headRow.appendChild(head);
+    var bodyRow = document.createElement("tr")
+    var bodyColName = document.createElement("td")
+    bodyColName.class = "col-md-2 mb-3"
+    bodyColName.innerHTML = '<input type="text" class="form-control" id="p'+ i + '" placeholder="" value="" required>'
+    bodyRow.appendChild(bodyColName)
+    for(var j=0; j<roomCount; j++) {
+      var bodyCol = document.createElement("td")
+      bodyCol.class = "col-md-2 mb-3"
+      bodyCol.innerHTML = '<input type="text" class="form-control" id="p'+ i + 'r' + j + '" placeholder="" value="" required>'
+      bodyRow.appendChild(bodyCol)
+    }
+    bodyTable.appendChild(bodyRow);
+    console.log(bodyTable);
+  }
+}
+
+function sendResult() {
     var agent_to_valuations = {};
-    var p1name = document.getElementById('p1name').value;
-    var p1vals = [];
-    var p1room1 = parseFloat(document.getElementById('p1room1').value);
-    p1vals.push(p1room1);
-    var p1room2 = parseFloat(document.getElementById('p1room2').value);
-    p1vals.push(p1room2);
-    var p1room3 = parseFloat(document.getElementById('p1room3').value);
-    p1vals.push(p1room3);
-    var p1room4 = parseFloat(document.getElementById('p1room4').value);
-    p1vals.push(p1room4);
-    agent_to_valuations[p1name] = p1vals
+    var roomCount = roomnames.length;
 
-    var p2name = document.getElementById('p2name').value;
-    var p2vals = [];
-    var p2room1 = parseFloat(document.getElementById('p2room1').value);
-    p2vals.push(p2room1);
-    var p2room2 = parseFloat(document.getElementById('p2room2').value);
-    p2vals.push(p2room2);
-    var p2room3 = parseFloat(document.getElementById('p2room3').value);
-    p2vals.push(p2room3);
-    var p2room4 = parseFloat(document.getElementById('p2room4').value);
-    p2vals.push(p2room4);
-    agent_to_valuations[p2name] = p2vals
+    for(var i=0; i<roomCount; i++) {
+      var name = document.getElementById('p'+i).value;
+      names.push(name);
+      var vals = [];
+      for(var j=0; j<roomCount; j++) {
+        var val = parseFloat(document.getElementById('p'+i+'r'+j).value);
+        vals.push(val);
+      }
+      agent_to_valuations[name] = vals;
+    }
+    var method = document.getElementById("method").options.value;
 
-    var p3name = document.getElementById('p3name').value;
-    var p3vals = [];
-    var p3room1 = parseFloat(document.getElementById('p3room1').value);
-    p3vals.push(p3room1);
-    var p3room2 = parseFloat(document.getElementById('p3room2').value);
-    p3vals.push(p3room2);
-    var p3room3 = parseFloat(document.getElementById('p3room3').value);
-    p3vals.push(p3room3);
-    var p3room4 = parseFloat(document.getElementById('p3room4').value);
-    p3vals.push(p3room4);
-    agent_to_valuations[p3name] = p3vals
-
-    var p4name = document.getElementById('p4name').value;
-    var p4vals = [];
-    var p4room1 = parseFloat(document.getElementById('p4room1').value);
-    p4vals.push(p4room1);
-    var p4room2 = parseFloat(document.getElementById('p4room2').value);
-    p4vals.push(p4room2);
-    var p4room3 = parseFloat(document.getElementById('p4room3').value);
-    p4vals.push(p4room3);
-    var p4room4 = parseFloat(document.getElementById('p4room4').value);
-    p4vals.push(p4room4);
-    agent_to_valuations[p4name] = p4vals
-
-    var response =  { "n": 4, "total_rent": 5700, "method": "PriceFairnessMethod", "agent_to_valuations" : agent_to_valuations}
-
-    // let form = document.createElement('form');
-    // form.action = 'https://google.com/search';
-    // form.method = 'GET';
-    //
-    // form.innerHTML = '<input name="q" value="test">';
-
-    // the form must be in the document to submit it
+    var response =  { "n": roomCount, "total_rent": parseFloat(totalRent), "method": method, "agent_to_valuations" : agent_to_valuations};
 
 
-    doWork(response)
+    //function(data, status) {
+    var result = {}
+    $.post('/receiver', JSON.stringify(response), function(data, status) {
+      if (status == 'success') {
+        console.log(data);
+        showResult(data);
+      }else{
+        showError("There was en arror!")
+      }
+    }, "json");
+
+   event.preventDefault();
+   // return false;
 }
 
-function doWork(response) {
-  // ajax the JSON to the server
-  $.post("receiver", JSON.stringify(response), function(){
-     
-  });
-  // stop link reloading the page
- event.preventDefault();
+function showError(mesage){
+  var valuation = document.getElementById('valuation');
+  var errorDiv = document.createElement('small');
+  errorDiv.class = "text-muted";
+  errorDiv.innerHTML = message
+  valuation.appendChild(errorDiv);
 }
 
-document.getElementById('btn').addEventListener('click', clicked);
+function showResult(data){
+  var setup = document.getElementById('result');
+  setup.classList.remove("hidden");
+  var roomCount = roomnames.length;
+  var resultCard = document.getElementById('resultCard');
+  for(var i=0; i<roomCount; i++) {
+    var card = document.createElement('div');
+    card.class = "card mb-4 shadow-sm"
+    var cardHeader = document.createElement('div');
+    cardHeader.class = "card-header"
+    cardHeader.innerHTML =  '<h4 class="my-0 font-weight-normal">'+ names[i] + '</h4>'
+    card.appendChild(cardHeader);
+    // console.log(data[names[i]]['price']);
+    // console.log(roomnames[data[names[i]]['room']] + ', $ ' + data[names[i]]['price']);
+    // console.log('<li> valuation: ' + data[names[i]]['valuation'] + '</li><li> utility: ' + data[names[i]]['utility'] +'</li>');
+    var cardBody = document.createElement('div');
+    cardBody.class = "card-body"
+    var price = document.createElement('h1');
+    price.class = "card-title pricing-card-title"
+    price.innerHTML = document.getElementById(roomnames[data[names[i]]['room']]).value  + ', $ ' + data[names[i]]['price'];
+    cardBody.appendChild(price);
+    var details = document.createElement('ul');
+    details.class = "list-unstyled mt-3 mb-4";
+    details.innerHTML = '<li> valuation: ' + data[names[i]]['valuation'] + '</li><li> utility: ' + data[names[i]]['utility'] +'</li>'
+    cardBody.appendChild(details);
+    card.appendChild(cardBody)
+    resultCard.appendChild(card);
+  }
+  //   <div class="card-header">
+  //     <h4 class="my-0 font-weight-normal">Free</h4>
+  //   </div>
+  //   <div class="card-body">
+  //     <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+  //     <ul class="list-unstyled mt-3 mb-4">
+  //       <li>10 users included</li>
+  //       <li>2 GB of storage</li>
+  //       <li>Email support</li>
+  //       <li>Help center access</li>
+  //     </ul>
+  // </div>
+  // var bodyTable = document.getElementById('resultTableBody');
+
+  // for(var i=0; i<roomCount; i++) {
+  //   var head = document.createElement("th");
+  //   console.log(roomnames)
+  //   head.innerHTML = document.getElementById(roomnames[i]).value
+  //   headRow.appendChild(head);
+  //   var bodyRow = document.createElement("tr")
+  //   var bodyColName = document.createElement("td")
+  //   bodyColName.class = "col-md-2 mb-3"
+  //   bodyColName.innerHTML = '<input type="text" class="form-control" id="result'+ i + '" placeholder="" value="" required>'
+  //   bodyRow.appendChild(bodyColName)
+  //   for(var j=0; j<roomCount; j++) {
+  //     var bodyCol = document.createElement("td")
+  //     bodyCol.class = "col-md-2 mb-3"
+  //     bodyCol.innerHTML = '<input type="text" class="form-control" id="result'+ i + 'r' + j + '" placeholder="" value="" required>'
+  //     bodyRow.appendChild(bodyCol)
+  //   }
+  //   bodyTable.appendChild(bodyRow);
+  //   console.log(bodyTable);
+  // }
+}
+// function doWork(response) {
+//   // ajax the JSON to the server
+//
+//   $.post('/receiver', response, function(data, textStatus) {
+//     console.log(textStatus);
+//     console.log(data);
+//   //data contains the JSON object
+//   //textStatus contains the status: success, error, etc
+//   }, "json");
+//   //
+//   // $.getJSON('/receiver',JSON.stringify(response), function(data) {
+//   //       console.log("hereeeee")
+//   //
+//   //             //do nothing
+//   // });
+//   // $.post("receiver", JSON.stringify(response), function(){
+//   //   console.log("hereeeee")
+//   // });
+//   // stop link reloading the page
+//  event.preventDefault();
+//  return false;
+//
+// }
+
+// document.getElementById('submitBtn').addEventListener('click', );
+// document.getElementById('roomnameBtn').addEventListener('click', addRow('roomnames'));
 
     </script>
 
   </body>
 </html>
 
-<style>* {padding: 0; margin: 0}</style>
+<style>* {padding: 0; margin: 0} .hidden {
+  display: none;
+}
+.pricing-header {
+  max-width: 700px;
+}
+.cardcontainer {
+  max-width: 960px;
+}
 
-<!-- <script src="js/lib/pixi.min.js"></script> -->
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+
+
+</style>
+
 
 
 

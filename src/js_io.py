@@ -18,12 +18,13 @@ def output():
 @app.route('/receiver', methods=['POST'])
 def worker():
     # read json + reply
-    data = request.get_json(force=True) 
+    data = request.get_json(force=True)
 
     split = Split(data)
     split.solve()
     results = split.get_results()
     split.output_results()
+    print(results)
     return json.dumps(results)
 
 if __name__ == "__main__":
