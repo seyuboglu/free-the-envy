@@ -48,26 +48,26 @@ class SplitCli(Process):
         TODO: work for any number of solution calls.
         """
         assert(self.solved)
+        result = list(self.results.values())[0]
+        assignments = result["assignments"]
+        data = [{"agent": agent,
+                 "room": assignments[i],
+                 "valuation": self.valuations[i, assignments[i]] * self.total_rent,
+                 #"utility": ((self.valuations[i, assignments[i]] - 
+                 #            prices[assignments[i]]) * 
+                 #            self.total_rent),
+                 "all_valuations": self.valuations[i, :] * self.total_rent} 
+                 for i, agent in enumerate(self.agents)]
+        columns = ["agent", "room", "valuation", "all_valuations"]
         for method, result in self.results.items():
             assignments = result["assignments"]
             prices = result["prices"]
-            data = [{"agent": agent,
-                    "room": assignments[i],
-                    "price": prices[assignments[i]] * self.total_rent,
-                    "valuation": self.valuations[i, assignments[i]] * self.total_rent,
-                    "utility": ((self.valuations[i, assignments[i]] - 
-                                prices[assignments[i]]) * 
-                                self.total_rent),
-                    "all_valuations": self.valuations[i, :] * self.total_rent} 
-                    for i, agent in enumerate(self.agents)]
-            print(method)
-            df = pd.DataFrame(data, columns=["agent", "room", 
-                                             "price", "valuation", 
-                                             "utility", "all_valuations"])
-
-            print(df)
-            print("")
-            df.to_csv(os.path.join(self.dir, "results.csv"))
+            for i, agent in enumerate(self.agents):
+                data[i][f"price_{method}"] = prices[assignments[i]] * self.total_rent
+            columns.append(f"price_{method}")
+        df = pd.DataFrame(data, columns=columns)
+        print(df)
+        df.to_csv(os.path.join(self.dir, "results.csv"))
 
     def run(self):
         """

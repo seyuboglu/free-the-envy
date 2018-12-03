@@ -1,0 +1,16 @@
+{
+    "n": 5,
+    "total_rent": 10000,
+
+    "methods": ["MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Kye":     [2086,	2357,	1084,	2638,	1835],
+        "Jesik":   [1800,	2300,	1300,	3600,	1000],
+        "Anika":   [2000,	2200,	1800,	2800,	1200],
+        "Ahry":    [1739,	2188,	1636,	2740,	1697],
+        "James":   [1902,	2107,	1840,	2720,	1431]
+    }
+}

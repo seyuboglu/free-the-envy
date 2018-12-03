@@ -1,3 +1,3 @@
-,agent,room,price,valuation,utility,all_valuations
-0,Jack,1,1794.5000000000002,1822.9999999999998,28.499999999999748,[1577. 1823.]
-1,Madilyn,0,1605.5,1634.0,28.499999999999936,[1634. 1766.]
+,agent,room,valuation,all_valuations,price_MinMaxPriceMethod,price_MinMaxDemandMethod,price_MaxMinUtilityMethod
+0,Jack,1,1822.9999999999998,[1577. 1823.],1766.0,1794.5000000000002,1794.5000000000002
+1,Madilyn,0,1634.0,[1634. 1766.],1634.0,1605.4999999999998,1605.5
