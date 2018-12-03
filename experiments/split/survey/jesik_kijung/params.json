@@ -1,14 +1,13 @@
 {
     "n": 2,
-    "total_rent": 1000,
+    "total_rent": 1850,
 
     "methods": ["MaxMinPriceMethod", 
                 "MinMaxPriceMethod",
                 "MaxMinUtilityMethod"],
 
     "agent_to_valuations": {
-        "Sabri": [400, 600],
-        "Kye": [300, 700]
+        "Kye": [405, 1445],
+        "Jesik": [600, 1250]
     }
-
 }

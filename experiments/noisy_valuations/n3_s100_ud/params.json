@@ -1,0 +1,13 @@
+{
+    "methods":  ["MinMaxDemandMethod",
+                 "MaxMinUtilityMethod"],
+    "n": 3,
+    "num_samples": 10000,
+    "scale_range": [1, 5],
+    "scale_samples": 50,
+
+    "x_scale": "log",
+
+    "mean_scale": 20,
+    "initial_scale": 10
+}

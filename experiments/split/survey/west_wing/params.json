@@ -1,0 +1,15 @@
+{
+    "n": 3,
+    "total_rent": 4300,
+
+    "methods": ["MaxMinPriceMethod", 
+                "MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Pierce": [1609, 1266, 1425],
+        "Rooz":   [1600, 1200, 1500],
+        "Sabri":  [1556, 1346, 1398]
+    }
+}

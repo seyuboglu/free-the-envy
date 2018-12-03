@@ -7,7 +7,9 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt 
 
-from methods.fairness import UtilityFairnessMethod, PriceFairnessMethod
+from methods.price import MaxMinPriceMethod, MinMaxPriceMethod
+from methods.utility import MaxMinUtilityMethod
+from methods.demand import MinMaxDemandMethod
 from utils import Process
 
 
@@ -90,9 +92,11 @@ class NoisySimulation(Process):
     def visualize(self):
         """
         """
+        sns.set_style("whitegrid")
         for method_name, fractions in self.fractions.items(): 
-            plt.plot(self.noise_scales, fractions, label=method_name)
+            plt.plot(self.noise_scales[::-1], fractions[::-1], label=method_name)
             plt.legend()
+            plt.xscale(self.x_scale)
 
         figures_dir = os.path.join(self.dir, "figures")
         if not os.path.exists(figures_dir):

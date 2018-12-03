@@ -1,0 +1,15 @@
+{
+    "n": 4,
+    "total_rent": 5700,
+
+    "methods": ["MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Geoff":  [1620, 1260, 1410, 1410],
+        "Cole":   [1510, 1405, 1432, 1353],
+        "Richard":[1702, 1049, 1364, 1585],
+        "Sabri":  [1575, 1375, 1325, 1425]
+    }
+}

@@ -8,7 +8,9 @@ import numpy as np
 from cvxopt import solvers
 import pandas as pd
 
-from methods.fairness import PriceFairnessMethod, UtilityFairnessMethod
+from methods.price import MaxMinPriceMethod, MinMaxPriceMethod
+from methods.utility import MaxMinUtilityMethod
+from methods.demand import MinMaxDemandMethod
 from utils import Process
 
 class SplitCli(Process):
@@ -55,14 +57,16 @@ class SplitCli(Process):
                     "valuation": self.valuations[i, assignments[i]] * self.total_rent,
                     "utility": ((self.valuations[i, assignments[i]] - 
                                 prices[assignments[i]]) * 
-                                self.total_rent)} 
+                                self.total_rent),
+                    "all_valuations": self.valuations[i, :] * self.total_rent} 
                     for i, agent in enumerate(self.agents)]
             print(method)
             df = pd.DataFrame(data, columns=["agent", "room", 
-                                            "price", "valuation", 
-                                            "utility"])
+                                             "price", "valuation", 
+                                             "utility", "all_valuations"])
             print(df)
             print("")
+            df.to_csv(os.path.join(self.dir, "results.csv"))
 
     def run(self):
         """
@@ -97,8 +101,8 @@ class SplitCli(Process):
         return self.agents, self.valuations
 
     def solve(self, 
-              method_name="PriceFairnessMethod",
-              method_class=PriceFairnessMethod):
+              method_name="MaxMinUtilityMethod",
+              method_class=MaxMinUtilityMethod):
         """
         Solves the splitting instance with the specified method. 
         args:
@@ -206,7 +210,7 @@ class Split():
 
         return self.agents, self.valuations
 
-    def solve(self, method_class=PriceFairnessMethod):
+    def solve(self, method_class=MaxMinUtilityMethod):
         """
         Solves the splitting instance with the specified method. 
         args:

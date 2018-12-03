@@ -1,0 +1,16 @@
+{
+    "n": 5,
+    "total_rent": 7200,
+
+    "methods":  ["MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Pierce":  [1266, 1723, 1296, 1428, 1487],
+        "Rohan":   [1119, 1806, 1224, 1493, 1558],
+        "Nico":    [1281, 1781, 1296, 1384, 1458],
+        "Monica":  [1163, 2002, 1178, 1399, 1458],
+        "Esteban": [1250, 2100, 1200, 1300, 1350]
+    }
+}

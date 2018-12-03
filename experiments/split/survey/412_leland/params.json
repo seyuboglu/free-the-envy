@@ -1,0 +1,20 @@
+{
+    "n": 3,
+    "total_rent": 5100,
+
+    "methods": ["MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "true_agent_to_valuations": {
+        "Andres": [1909, 1887, 1304],
+        "Sarah":  [1700, 1898, 1502],
+        "Ahry":   [1502, 1836, 1762]
+    }, 
+
+    "agent_to_valuations": {
+        "Andres": [1910, 1890, 1300],
+        "Sarah":  [1700, 1900, 1500],
+        "Ahry":   [1500, 1840, 1760]
+    }
+}

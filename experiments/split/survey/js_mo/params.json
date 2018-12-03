@@ -1,0 +1,13 @@
+{
+    "n": 2,
+    "total_rent": 3400,
+
+    "methods": ["MinMaxPriceMethod",
+        "MinMaxDemandMethod",
+        "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Jack": [1577, 1823],
+        "Madilyn": [1634, 1766]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "methods":  ["MinMaxPriceMethod",
+                 "MinMaxDemandMethod",
+                 "MaxMinUtilityMethod"],
+    "n": 3,
+    "num_samples": 10000,
+    "scale_range": [1, 11],
+    "scale_samples": 50,
+
+    "mean_scale": 20,
+    "initial_scale": 15
+}
