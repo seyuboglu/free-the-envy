@@ -1,0 +1,18 @@
+{
+    "n": 3,
+    "total_rent": 30,
+
+    "methods": ["PriorityMethod"],
+
+    "agent_to_valuations": {
+        "Andres": [5, 10, 15],
+        "Sarah":  [10, 10, 10],
+        "Ahry":   [5, 5, 20]
+    }, 
+
+    "agent_to_priority": {
+        "Andres": 0.9,
+        "Sarah": 0.9,
+        "Ahry": 0.4
+    }
+}

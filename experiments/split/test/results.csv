@@ -1,0 +1,4 @@
+,agent,room,valuation,all_valuations,price_PriorityMethod
+0,Andres,1,10.0,[ 5. 10. 15.],3.3333333333333264
+1,Sarah,0,10.0,[10. 10. 10.],8.333333333333337
+2,Ahry,2,20.0,[ 5.  5. 20.],18.333333333333336

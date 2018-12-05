@@ -1,0 +1,15 @@
+{
+    "n": 4,
+    "total_rent": 4500,
+
+    "methods": ["MinMaxPriceMethod",
+                "MinMaxDemandMethod",
+                "MaxMinUtilityMethod"],
+
+    "agent_to_valuations": {
+        "Nathan":  [1169, 1093, 1196, 1042],
+        "Remeny":  [1144, 1093, 1195, 1068],
+        "Farica":  [1141, 1104, 1178, 1077],
+        "Cam":     [1144, 1093, 1246, 1017]
+    }
+}

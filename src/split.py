@@ -11,6 +11,7 @@ import pandas as pd
 from methods.price import MaxMinPriceMethod, MinMaxPriceMethod
 from methods.utility import MaxMinUtilityMethod
 from methods.demand import MinMaxDemandMethod
+from methods.priority import PriorityMethod
 from utils import Process
 
 class SplitCli(Process):
@@ -90,11 +91,14 @@ class SplitCli(Process):
             assert(len(v) == self.n)
 
         valuations = []
+        self.priorities = np.full(len(self.agent_to_valuations), 0.5)
         agents = []
-        for agent, curr_valuations in self.agent_to_valuations.items():
+        for i, (agent, curr_valuations) in enumerate(self.agent_to_valuations.items()):
             # scale between 0 and 1
             valuations.append(np.array(curr_valuations) / self.total_rent)
             agents.append(agent)
+            if hasattr(self, "agent_to_priority"):
+                self.priorities[i] = self.agent_to_priority[agent]
 
         self.valuations = np.stack(valuations, axis=0)
         self.agents = agents
@@ -110,10 +114,13 @@ class SplitCli(Process):
             method_class    (class) a class of Method type.
         TODO: implement base method class
         """
-        method = method_class(self.valuations)
+        if method_name == "PriorityMethod":
+            method = method_class(self.valuations, self.priorities)
+        else:
+            method = method_class(self.valuations)
         assignments, prices = method.solve()
         self.results[method_name] = {"assignments": assignments,
-                                      "prices": prices}
+                                     "prices": prices}
         self.solved[method_name] = True
 
 
