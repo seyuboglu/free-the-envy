@@ -1,0 +1,18 @@
+{
+    "questions": {
+        "utility_v_demand.csv": 
+            {
+                "options": ["utility", "demand"],
+                "target": "demand",
+                "plots": ["group_plot"]
+            }, 
+        "utility_v_price.csv":
+            {
+                "options": ["utility", "price"],
+                "target": "price",
+                "plots": []
+
+            }
+    }
+
+}

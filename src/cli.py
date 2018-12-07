@@ -7,6 +7,8 @@ import click
 
 from split import SplitCli
 from noisy import NoisySimulation
+from survey import SurveyResults
+from simulate import Simulation
 
 
 def get_process(process_name):

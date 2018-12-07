@@ -11,8 +11,8 @@
     }, 
 
     "agent_to_priority": {
-        "Andres": 0.5,
-        "Sarah": 0.1,
-        "Ahry": 0.5
+        "Andres": 0.8,
+        "Sarah": 1.0,
+        "Ahry": 0.8
     }
 }

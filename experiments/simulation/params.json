@@ -1,0 +1,10 @@
+{
+    "methods":  ["PriorityMethod"],
+    "n": 5,
+    "num_samples": 10000,
+
+    "x_scale": "log",
+
+    "mean_scale": 0.5,
+    "initial_scale": 10
+}

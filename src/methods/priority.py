@@ -109,13 +109,11 @@ class PriorityMethod(LPMethod):
                 if other_room == assigned_room:
                     continue
                 g = np.zeros(self.n + 1)
-                g[assigned_room] = 2.0 * (1 - self.priorities[agent_id])
-                g[other_room] = -2.0 * (1 - self.priorities[agent_id])
+                g[assigned_room] = 1.0 #* (1 - self.priorities[agent_id])
+                g[other_room] = -1.0#* (1 - self.priorities[agent_id])
 
-                threshold = 0.1
                 h = 2.0 * (self.priorities[agent_id] * self.valuations[agent_id, assigned_room] - 
-                           self.priorities[agent_id] * self.valuations[agent_id, other_room] + 
-                           threshold)
+                           self.priorities[agent_id] * self.valuations[agent_id, other_room])
                 #h = (self.valuations[agent_id, assigned_room] - 
                 #     self.valuations[agent_id, other_room])
                 
