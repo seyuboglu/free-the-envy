@@ -4,29 +4,32 @@
     <meta charset="utf-8">
     <title></title>
     <!-- <link rel="shortcut icon" href=""> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- <script src="jquery-3.3.1.min.js"></script> -->
-
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
   </head>
   <!-- <script src="pixi.js"></script> -->
-
   <body class="bg-light">
     <div class="container" id="setup">
+      <div class="py-5 text-center">
+      <h1 class="display-4">Free the Envy</h1>
+      <p class="lead mt-3">We will help you to divide rent among roommates, <br> with <highlight> your definition of fairness  </highlight>into account!</p>
       <form class="needs-validation" novalidate>
-
-        <div class="py-5 text-center">
-          <h2>What is the house's total rent?</h2>
-          <p class="lead">We will help you split this $ well!</p>
+      </div>
+      <div class="py-5 text-center">
+          <h4 class="my-0 font-weight-normal">What is the house's total rent?</h4>
+          <p class="lead">Let's split this $ well!</p>
           <div class="col-xs-4" >
-                  <input type="text" class="form-control" id="totalRent" placeholder="ex) 1000" />
+                  <input type="text" class="form-control" id="totalRent" placeholder="ex) 1000"/>
                   <div class="invalid-feedback" style="width: 100%;">
                       Please specify the total rent $
                   </div>
           </div>
-        </div>
+          <br>
+          <br>
 
-        <div class="py-5 text-center">
-          <h2>Please list all the rooms you have</h2>
+
+          <h4 class="my-0 font-weight-normal">What rooms do we have?</h4>
           <p class="lead">Give each room a name</p>
         <div class="col-xs-4" id="roomnames">
             <div class="mb-3">
@@ -45,281 +48,362 @@
         <button type="button" class="btn btn-secondary btn-lg" id="roomnameBtn" onclick="addRow()" >+</button>
       </div>
       <button type="button" class="btn btn-primary btn-lg btn-block mb-3" id="setupBtn" onclick="setup()" >Submit</button>
+    </form>
     </div>
       <div class="container hidden" id="valuation">
         <div class="py-5 text-center">
-          <h2>How much do you value?</h2>
-          <p class="lead">Indicate your valuation for each room in the apartment</p>
+          <h4 class="display-4">Let's do some bidding</h4>
+          <p class="lead">Take turns to allocate the total rent to rooms - <br> how much valuation do you give to each? </p>
+          <p class="muted">Valuations should <mark>add up to the total rent!</mark></em></p>
+          <p class="muted">Note: If you decide to prioritize price or room, one can be compensated for the other</p>
         </div>
-        <div class="row">
-          <!-- <div class="col-md-5 order-md-2 mb-4"> -->
-            <form class="needs-validation" novalidate>
-              <div class="input-group">
-
-              <div class="table-responsive">
-              <table class="table table-striped table-md" id="valueTable">
-                <thead>
-                    <tr id="valueHeadRow">
-                      <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody id="valueTableBody">
-
-                </tbody>
-              </table>
-              <h4 class="mb-3">Method</h4>
-              <div class="d-block my-3">
-                <select class="form-control form-control-md" id="method">
-                  <option>Price Fairness</option>
-                  <option>Utility Fairness</option>
+        <div class="mb-3 text-center" id="valueAccordion"> </div>
+        <br>
+        <br>
+        <div class="mb-3 text-center">
+            <h5 class="display-4">Method</h5>
+              <p class="lead">Which property you want the result to be fairer in? </p>
+              <select class="form-control form-control-md" id="method">
+                  <option>Priority</option>
+                  <option>Demand</option>
+                  <option>Price</option>
+                  <option>Utility</option>
                 </select>
+              <ul class="list-group mt-3 list-group-flush">
+                <li class="list-group-item">
+                  <h6 class="my-0">Priority</h6>
+                  <small class="text-muted">What do each person care more? Price or room?</small>
+                </li>
+              </ul>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h6 class="my-0">Demand</h6>
+                  <small class="text-muted">How popular is each room?</small>
+                </li>
+              </ul>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h6 class="my-0">Price</h6>
+                  <small class="text-muted">How not to rip someone off in price?</small>
+                </li>
+              </ul>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h6 class="my-0">Utility</h6>
+                  <small class="text-muted">The original Spliddit algorithm</small>
+                </li>
+              </ul>
+              <br>
               </div>
               <br>
-              <button class="btn btn-primary btn-lg btn-block mb-3" id="submitBtn" onclick="sendResult()">Submit</button>
-              </div>
-              </form>
-            <!-- </div> -->
-
-            </div>
-
-            </form>
-
-            </div>
+              <button class="btn btn-primary btn-lg btn-block mb-3" id="submitBtn" onclick="sendResult();event.preventDefault();">Submit</button>
           </div>
           <div class="container hidden" id="result">
             <div class="py-5 text-center">
               <h2>Result</h2>
               <p class="lead">Here we go!</p>
             </div>
-            <div class="card-deck mb-3 text-center" id="resultCard">
-
-            </div>
           </div>
         </div>
       </div>
-    <div id="display"></div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/boostrap-slider.js') }}"></script>
 
-    <!-- <script src="slideshow.js"></script> -->
     <script>
+    var roomnames = ['roomname1', 'roomname2']
+    var names = []
+    var totalRent = 0
+    var room_to_vals = {}
+    var max_val = 0
+    var min_val = Number.POSITIVE_INFINITY
 
-var roomnames = ['roomname1', 'roomname2']
-var names = []
-var totalRent = 0
-function addRow() {
-  // if(ID == 'roomnames'){
-    var parent = document.getElementById('roomnames');
-    var child = document.createElement("div");
-    child.class = "mb-3"
-    var newnum = roomnames.length + 1
-    var id = 'roomname' + newnum
-    child.innerHTML =  '<input type="text" class="form-control" id="' + id +'" required> <div class="invalid-feedback"> Please enter room name </div> <br>'
-    console.log(child.innerHTML)
-    // var input = document.createElement("input");
-    // input.type = "text";
-    // input.class= "form-control";
-    // input.id = id
-    roomnames.push(id)
-    // child.appendChild(input);
-    parent.appendChild(child);
-  // }
-}
 
-function setup() {
-  var valuation = document.getElementById('valuation');
-  valuation.classList.remove("hidden");
-  var setup = document.getElementById('setup');
-  setup.classList.add("hidden");
-  totalRent = document.getElementById('totalRent').value;
-  createValuationRows();
-}
+    function addRow() {
+        var parent = document.getElementById('roomnames');
+        var child = document.createElement("div");
+        child.class = "mb-3"
+        var newnum = roomnames.length + 1
+        var id = 'roomname' + newnum
+        child.innerHTML =  '<input type="text" class="form-control" id="' + id +'" required> <div class="invalid-feedback"> Please enter room name </div> <br>'
+        roomnames.push(id)
+        parent.appendChild(child);
 
-function createValuationRows() {
-  var roomCount = roomnames.length;
-  var headRow = document.getElementById('valueHeadRow');
-  var bodyTable = document.getElementById('valueTableBody');
-
-  for(var i=0; i<roomCount; i++) {
-    var head = document.createElement("th");
-    console.log(roomnames)
-    head.innerHTML = document.getElementById(roomnames[i]).value
-    headRow.appendChild(head);
-    var bodyRow = document.createElement("tr")
-    var bodyColName = document.createElement("td")
-    bodyColName.class = "col-md-2 mb-3"
-    bodyColName.innerHTML = '<input type="text" class="form-control" id="p'+ i + '" placeholder="" value="" required>'
-    bodyRow.appendChild(bodyColName)
-    for(var j=0; j<roomCount; j++) {
-      var bodyCol = document.createElement("td")
-      bodyCol.class = "col-md-2 mb-3"
-      bodyCol.innerHTML = '<input type="text" class="form-control" id="p'+ i + 'r' + j + '" placeholder="" value="" required>'
-      bodyRow.appendChild(bodyCol)
     }
-    bodyTable.appendChild(bodyRow);
-    console.log(bodyTable);
-  }
-}
 
-function sendResult() {
-    var agent_to_valuations = {};
-    var roomCount = roomnames.length;
-
-    for(var i=0; i<roomCount; i++) {
-      var name = document.getElementById('p'+i).value;
-      names.push(name);
-      var vals = [];
-      for(var j=0; j<roomCount; j++) {
-        var val = parseFloat(document.getElementById('p'+i+'r'+j).value);
-        vals.push(val);
-      }
-      agent_to_valuations[name] = vals;
+    function setup() {
+      var valuation = document.getElementById('valuation');
+      valuation.classList.remove("hidden");
+      var setup = document.getElementById('setup');
+      setup.classList.add("hidden");
+      totalRent = document.getElementById('totalRent').value;
+      createValuationRows();
     }
-    var method = document.getElementById("method").options.value;
 
-    var response =  { "n": roomCount, "total_rent": parseFloat(totalRent), "method": method, "agent_to_valuations" : agent_to_valuations};
+    function createValuationRows(){
+      var valueAccordion = document.getElementById('valueAccordion');
+
+      for(var i = 0; i < roomnames.length; i ++){
+        var card = document.createElement('div');
+        card.setAttribute('class', 'card');
+        // card.setAttribute('style', "width: 960px;");
+        valueAccordion.appendChild(card);
+
+        var cardHeader = document.createElement('div');
+        cardHeader.setAttribute('class', 'card-header');
+        cardHeader.id = "cardHeader" + i
+        card.appendChild(cardHeader);
+
+        var h5 = document.createElement('h5');
+        h5.setAttribute('class', "mb-0");
+        cardHeader.appendChild(h5);
+
+        var cardBtn = document.createElement('button');
+        cardBtn.setAttribute('data-toggle', "collapse");
+        cardBtn.setAttribute('class', "btn btn-link");
+        cardBtn.type = "button";
+        cardBtn.setAttribute('data-target',  "#collapse"+i);
+        cardBtn.setAttribute('aria-controls', "collapse"+i,);
+        cardBtn.innerHTML = "Roommate " + i;
+        if(i != 0){
+          cardBtn.setAttribute('class', "btn btn-link collapsed");
+          cardBtn.setAttribute('aria-expanded',"false");
+        }else{
+          cardBtn.setAttribute('class', "btn btn-link");
+          cardBtn.setAttribute('aria-expanded',"true");
+        }
+        h5.appendChild(cardBtn);
 
 
-    //function(data, status) {
-    var result = {}
-    $.post('/receiver', JSON.stringify(response), function(data, status) {
-      if (status == 'success') {
-        console.log(data);
-        showResult(data);
-      }else{
-        showError("There was en arror!")
+        var collapse = document.createElement('div');
+        collapse.setAttribute('class' , "collapse");
+        collapse.id = "collapse" + i;
+        collapse.setAttribute('aria-labelledby',  "cardHeader" + i);
+        collapse.setAttribute('data-parent',"#valueAccordion");
+
+        var table = document.createElement('table');
+        table.setAttribute('class','table table-striped table-md');
+        table.setAttribute('id','valueTable' + i);
+        table.innerHTML = '<thead> <tr id="valueHeadRow'+ i+'"> <th>Name</th> </tr> </thead><tbody id="valueTableBody' + i+ '"></tbody>'
+        collapse.appendChild(table);
+
+        var form = document.createElement('form');
+        form.setAttribute('class','form-group');
+
+        collapse.append(form);
+
+        var priority_label = document.createElement('label');
+        priority_label.setAttribute('for','priorityLabel'+i);
+        priority_label.innerHTML = '<h5>I care about </h5> 0: Only Price,  5: Both,  10: Only room'
+        form.appendChild(priority_label);
+
+        var select = document.createElement('select');
+        select.setAttribute('class', 'form-control ');
+        select.setAttribute('defaultValue', 5);
+        select.setAttribute('id', 'priorityVal'+i);
+
+        for(var k=0; k <= 10; k ++){
+          var option =   '<option>' + k + '</option>';
+          if(k == 5){
+            option =   '<option selected="selected">' + k + '</option>';
+          }
+          select.innerHTML += option;
+        }
+        form.appendChild(select);
+        card.appendChild(collapse);
+
+        var bodyRow = document.createElement("tr")
+        var bodyColName = document.createElement("td")
+        bodyColName.class = "col-md-2 mb-3"
+        bodyColName.innerHTML = '<input type="text" class="form-control" id="p'+ i + '" placeholder="" value="" required>'
+        bodyRow.appendChild(bodyColName)
+
+        for(var j=0; j<roomnames.length; j++) {
+            var head = document.createElement("th");
+            head.innerHTML = document.getElementById(roomnames[j]).value
+            var headRow = document.getElementById('valueHeadRow'+i);
+            headRow.appendChild(head);
+
+            var bodyCol = document.createElement("td")
+            bodyCol.class = "col-md-2 mb-3"
+            bodyCol.innerHTML = '<input type="text" class="form-control" id="p'+ i + 'r' + j + '" placeholder="" value="" required>'
+            bodyRow.appendChild(bodyCol)
+
+        }
+        table.appendChild(bodyRow);
       }
-    }, "json");
 
-   event.preventDefault();
-   // return false;
-}
+    }
 
-function showError(mesage){
-  var valuation = document.getElementById('valuation');
-  var errorDiv = document.createElement('small');
-  errorDiv.class = "text-muted";
-  errorDiv.innerHTML = message
-  valuation.appendChild(errorDiv);
-}
+    function sendResult() {
+        var agent_to_valuations = {};
+        var roomCount = roomnames.length;
+        var agent_to_priority = {};
+        for(var i=0; i<roomCount; i++) {
+          var name = document.getElementById('p'+i).value;
+          names.push(name);
+          var vals = [];
+          for(var j=0; j<roomCount; j++) {
+            var val = parseFloat(document.getElementById('p'+i+'r'+j).value);
+            if(max_val < val){
+              max_val = val
+            }
+            if(min_val > val){
+              min_val = val
+            }
+            if(i == 0){
+              room_to_vals[j] = [];
+            }
+            room_to_vals[j].push(val);
+            vals.push(val);
+          }
+          if(method = 'PriorityMethod'){
+            agent_to_priority[name] = parseFloat(document.getElementById('priorityVal'+i)) / 10;
+          }
+          agent_to_valuations[name] = vals;
+        }
+        var method = document.getElementById("method").options.value;
+        if(method == 'Price'){
+          method = 'MaxMinPriceMethod'
+        }else if(method == 'Utility'){
+          method = 'MaxMinUtilityMethod'
+        }else if(method == 'Demand'){
+          method = 'MinMaxDemandMethod'
+        }else{
+          method = 'PriorityMethod'
+        }
 
-function showResult(data){
-  var setup = document.getElementById('result');
-  setup.classList.remove("hidden");
-  var roomCount = roomnames.length;
-  var resultCard = document.getElementById('resultCard');
-  for(var i=0; i<roomCount; i++) {
-    var card = document.createElement('div');
-    card.class = "card mb-4 shadow-sm"
-    var cardHeader = document.createElement('div');
-    cardHeader.class = "card-header"
-    cardHeader.innerHTML =  '<h4 class="my-0 font-weight-normal">'+ names[i] + '</h4>'
-    card.appendChild(cardHeader);
-    // console.log(data[names[i]]['price']);
-    // console.log(roomnames[data[names[i]]['room']] + ', $ ' + data[names[i]]['price']);
-    // console.log('<li> valuation: ' + data[names[i]]['valuation'] + '</li><li> utility: ' + data[names[i]]['utility'] +'</li>');
-    var cardBody = document.createElement('div');
-    cardBody.class = "card-body"
-    var price = document.createElement('h1');
-    price.class = "card-title pricing-card-title"
-    price.innerHTML = document.getElementById(roomnames[data[names[i]]['room']]).value  + ', $ ' + data[names[i]]['price'];
-    cardBody.appendChild(price);
-    var details = document.createElement('ul');
-    details.class = "list-unstyled mt-3 mb-4";
-    details.innerHTML = '<li> valuation: ' + data[names[i]]['valuation'] + '</li><li> utility: ' + data[names[i]]['utility'] +'</li>'
-    cardBody.appendChild(details);
-    card.appendChild(cardBody)
-    resultCard.appendChild(card);
-  }
-  //   <div class="card-header">
-  //     <h4 class="my-0 font-weight-normal">Free</h4>
-  //   </div>
-  //   <div class="card-body">
-  //     <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-  //     <ul class="list-unstyled mt-3 mb-4">
-  //       <li>10 users included</li>
-  //       <li>2 GB of storage</li>
-  //       <li>Email support</li>
-  //       <li>Help center access</li>
-  //     </ul>
-  // </div>
-  // var bodyTable = document.getElementById('resultTableBody');
+        var response =  { "n": roomCount, "total_rent": parseFloat(totalRent), "method": method, "agent_to_valuations" : agent_to_valuations};
+        if (method == 'PriorityMethod'){
+          response['agent_to_priority'] = agent_to_priority;
+        }
 
-  // for(var i=0; i<roomCount; i++) {
-  //   var head = document.createElement("th");
-  //   console.log(roomnames)
-  //   head.innerHTML = document.getElementById(roomnames[i]).value
-  //   headRow.appendChild(head);
-  //   var bodyRow = document.createElement("tr")
-  //   var bodyColName = document.createElement("td")
-  //   bodyColName.class = "col-md-2 mb-3"
-  //   bodyColName.innerHTML = '<input type="text" class="form-control" id="result'+ i + '" placeholder="" value="" required>'
-  //   bodyRow.appendChild(bodyColName)
-  //   for(var j=0; j<roomCount; j++) {
-  //     var bodyCol = document.createElement("td")
-  //     bodyCol.class = "col-md-2 mb-3"
-  //     bodyCol.innerHTML = '<input type="text" class="form-control" id="result'+ i + 'r' + j + '" placeholder="" value="" required>'
-  //     bodyRow.appendChild(bodyCol)
-  //   }
-  //   bodyTable.appendChild(bodyRow);
-  //   console.log(bodyTable);
-  // }
-}
-// function doWork(response) {
-//   // ajax the JSON to the server
-//
-//   $.post('/receiver', response, function(data, textStatus) {
-//     console.log(textStatus);
-//     console.log(data);
-//   //data contains the JSON object
-//   //textStatus contains the status: success, error, etc
-//   }, "json");
-//   //
-//   // $.getJSON('/receiver',JSON.stringify(response), function(data) {
-//   //       console.log("hereeeee")
-//   //
-//   //             //do nothing
-//   // });
-//   // $.post("receiver", JSON.stringify(response), function(){
-//   //   console.log("hereeeee")
-//   // });
-//   // stop link reloading the page
-//  event.preventDefault();
-//  return false;
-//
-// }
+        console.log(response);
+        var result = {}
+        $.post('/receiver', JSON.stringify(response), function(data, status) {
+          if (status == 'success') {
+            console.log(data);
+            showResult(data);
+          }else{
+            showError("There was en arror!")
+          }
+        }, "json");
+       event.preventDefault();
+    }
 
-// document.getElementById('submitBtn').addEventListener('click', );
-// document.getElementById('roomnameBtn').addEventListener('click', addRow('roomnames'));
+    function showError(mesage){
+      var valuation = document.getElementById('valuation');
+      var errorDiv = document.createElement('small');
+      errorDiv.class = "text-muted";
+      errorDiv.innerHTML = message;
+      valuation.appendChild(errorDiv);
+    }
 
+    function showResult(data){
+      var result = document.getElementById('result');
+      result.classList.remove("hidden");
+      var room_to_person = {}
+      for(var i=0; i < names.length; i ++){
+        room_to_person[data[names[i]]['room']] = names[i]
+      }
+
+      for(var i=0; i<roomnames.length; i++){
+          var chart = document.createElement("canvas");
+          chart.id = "resultChart" + i
+          var room_name = document.getElementById(roomnames[i]).value
+          result.appendChild(chart);
+          var name = room_to_person[i];
+          var room_price = Array(roomnames.length).fill(data[name]['price']);
+          if (min_val < 100){
+            min_val = 0
+          }else{
+            min_val -= 100
+          }
+
+          new Chart(chart, {
+            type: 'bar',
+            data: {
+              labels: names,
+              datasets: [{
+                label: 'Valuation',
+                data: room_to_vals[i],
+                backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                                  ],
+                borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                             ],
+                borderWidth: 1
+              // }]
+              },{
+                label: 'Price',
+                data: room_price,
+                type: 'line'
+              }],
+            },
+            options: {
+                title: {
+                   display: true,
+                   text: room_name + " : " + name + " with Price $" + data[name]['price'].toFixed(2),
+                   fontFamily: 'Helvetica Neue',
+                   fontSize: 20,
+                   padding: 10,
+                },
+                legend: {
+                   display: true,
+                   labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                   }
+                },
+                scales: {
+
+                    yAxes: [{
+                              ticks: {
+                                      callback: function(value, index, values) {
+                                          return '$' + value;
+                                      },
+                                      max: max_val,
+                                      min: min_val,
+                                    },
+                              stacked: true,
+                              display: true,
+                  						scaleLabel: {
+                  							display: true,
+                  							labelString: 'Valuation'
+                  						}
+                            }]
+               },
+               legend: {
+                   labels: {
+                       fontColor: "grey",
+                       fontSize: 18
+                   }
+               },
+               elements: {
+                    point:{
+                        radius: 0
+                    }
+                }
+          }
+        });
+      }
+    }
     </script>
 
   </body>
 </html>
 
-<style>* {padding: 0; margin: 0} .hidden {
-  display: none;
-}
-.pricing-header {
-  max-width: 700px;
-}
-.cardcontainer {
-  max-width: 960px;
-}
-
-.pricing-header {
-  max-width: 700px;
-}
-
-.card-deck .card {
-  min-width: 220px;
-}
-
-
-
-</style>
 
 
 
