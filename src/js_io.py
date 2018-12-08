@@ -18,8 +18,8 @@ def output():
 @app.route('/receiver', methods=['POST'])
 def worker():
     # read json + reply
+    print("hello")
     data = request.get_json(force=True)
-
     split = Split(data)
     split.solve()
     results = split.get_results()

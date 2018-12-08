@@ -54,10 +54,10 @@ class SplitCli(Process):
         data = [{"agent": agent,
                  "room": assignments[i],
                  "valuation": self.valuations[i, assignments[i]] * self.total_rent,
-                 #"utility": ((self.valuations[i, assignments[i]] - 
-                 #            prices[assignments[i]]) * 
+                 #"utility": ((self.valuations[i, assignments[i]] -
+                 #            prices[assignments[i]]) *
                  #            self.total_rent),
-                 "all_valuations": self.valuations[i, :] * self.total_rent} 
+                 "all_valuations": self.valuations[i, :] * self.total_rent}
                  for i, agent in enumerate(self.agents)]
         columns = ["agent", "room", "valuation", "all_valuations"]
         for method, result in self.results.items():
@@ -105,7 +105,7 @@ class SplitCli(Process):
 
         return self.agents, self.valuations
 
-    def solve(self, 
+    def solve(self,
               method_name="MaxMinUtilityMethod",
               method_class=MaxMinUtilityMethod):
         """
@@ -172,13 +172,13 @@ class Split():
         TODO: work for any number of solution calls.
         """
         assert(self.solved)
-        data = [{"agent": agent,
+        data = [{agent: {
                  "room": self.assignments[i],
                  "price": self.prices[self.assignments[i]] * self.total_rent,
                  "valuation": self.valuations[i, self.assignments[i]] * self.total_rent,
                  "utility": ((self.valuations[i, self.assignments[i]] -
                               self.prices[self.assignments[i]]) *
-                             self.total_rent)}
+                             self.total_rent)}}
                 for i, agent in enumerate(self.agents)]
 
         df = pd.DataFrame(data, columns=["agent", "room",
