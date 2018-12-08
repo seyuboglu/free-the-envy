@@ -99,11 +99,13 @@
               <button class="btn btn-primary btn-lg btn-block mb-3" id="submitBtn" onclick="sendResult();event.preventDefault();">Submit</button>
           </div>
           <div class="container hidden" id="result">
-            <div class="py-5 text-center">
+            <div class="py-5 text-center mb-4">
               <h2>Result</h2>
-              <p class="lead">Here we go!</p>
+              <p class="lead">Here we go! (refresh to start over)</p>
             </div>
           </div>
+          <br>
+          <br>
         </div>
       </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -303,6 +305,8 @@
     }
 
     function showResult(data){
+      var setup = document.getElementById('valuation');
+      setup.classList.add("hidden");
       var result = document.getElementById('result');
       result.classList.remove("hidden");
       var room_to_person = {}
