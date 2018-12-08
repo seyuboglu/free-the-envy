@@ -1,18 +1,13 @@
 {
     "n": 3,
-    "total_rent": 30,
+    "total_rent": 1,
 
-    "methods": ["PriorityMethod"],
+    "methods": ["MaxMinUtilityMethod",
+                "MinMaxPriceMethod"],
 
     "agent_to_valuations": {
-        "Andres": [5, 10, 15],
-        "Sarah":  [10, 10, 10],
-        "Ahry":   [5, 5, 20]
-    }, 
-
-    "agent_to_priority": {
-        "Andres": 0.9,
-        "Sarah": 0.3,
-        "Ahry": 0.9
+        "Andres": [0.5, 0.5, 0.0],
+        "Sarah":  [0.5, 0.5, 0.0],
+        "Ahry":   [0.1, 0.1, 0.8]
     }
 }
