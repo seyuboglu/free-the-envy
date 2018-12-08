@@ -316,6 +316,7 @@
 
       for(var i=0; i<roomnames.length; i++){
           var chart = document.createElement("canvas");
+          chart.setAttribute('class', 'mb-3');
           chart.id = "resultChart" + i
           var room_name = document.getElementById(roomnames[i]).value
           result.appendChild(chart);
