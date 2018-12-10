@@ -1,7 +1,7 @@
 # Criteria of Fairness in Rent Splitting
 By: Sabri Eyuboglu, Kye Kim, and KiJung Park
 
-Implementation of the fair-rent splitting algorithms described in the paper Criteria of Fairness in Rent Splitting.
+Implementation of the fair-rent splitting algorithms described in the paper [Criteria of Fairness in Rent Splitting](manuscript.pdf).
 
 ## Installation
 Clone the repository
