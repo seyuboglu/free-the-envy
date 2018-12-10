@@ -75,3 +75,48 @@ Our simulations generate random rent-splitting instances using nested dirichlet 
     "initial_scale": 10
 }
 ```
+
+## Analyzing User Study Data
+Create a directory for the survey 
+```
+mkdir survey
+cd survey
+```
+
+Add survey data as a csv to a data subdir directory. 
+```
+mkdir data
+```
+
+Each survey question should be a separate CSV, with a row for each response and column for each option and other metadata.
+
+Create a parameters json file
+```
+vi params.json
+```
+and specify parameters in the following format 
+
+```
+{
+    "questions": {
+        "utility_v_demand.csv": 
+            {
+                "options": ["utility", "demand"],
+                "target": "demand",
+                "plots": ["group_plot"]
+            }, 
+        "utility_v_price.csv":
+            {
+                "options": ["utility", "price"],
+                "target": "price",
+                "plots": []
+
+            }
+    }
+
+}
+```
+
+
+
+``
